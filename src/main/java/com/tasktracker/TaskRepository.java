@@ -12,6 +12,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.*;
 
+/**
+ * Repository class handling persistence and retrieval of tasks.
+ * <p>
+ * Tasks are stored in a JSON file and loaded using Jackson.
+ * The repository provides CRUD operations and filtering by status.
+ * </p>
+ */
 public class TaskRepository {
 
     private final ObjectMapper mapper = new ObjectMapper();
@@ -20,6 +27,11 @@ public class TaskRepository {
 
     private final Path filePath;
 
+    /**
+     * Creates a new repository bound to the specified JSON file.
+     *
+     * @param filePath path to the JSON file used to store tasks
+     */
     public TaskRepository(Path filePath) {
         mapper.registerModule(new JavaTimeModule());
         mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -28,6 +40,13 @@ public class TaskRepository {
         this.filePath = filePath;
     }
 
+    /**
+     * Adds a new task to the repository.
+     *
+     * @param description description of the new task
+     *
+     * @return generated task ID, or -1 if an error occurs
+     */
     public int addTask(String description) {
         try {
             deserialize();
@@ -43,6 +62,14 @@ public class TaskRepository {
         return -1;
     }
 
+    /**
+     * Updates the description of an existing task.
+     *
+     * @param id          task ID
+     * @param description new task description
+     *
+     * @return {@code true} if the task exists and was updated; {@code false} otherwise
+     */
     public boolean updateTask(int id, String description) {
         try {
             deserialize();
@@ -59,6 +86,13 @@ public class TaskRepository {
         return true;
     }
 
+    /**
+     * Deletes a task by ID.
+     *
+     * @param id task ID
+     *
+     * @return {@code true} if successfully deleted; {@code false} if the task does not exist
+     */
     public boolean deleteTask(int id) {
         try {
             deserialize();
@@ -74,6 +108,13 @@ public class TaskRepository {
         return true;
     }
 
+    /**
+     * Marks a task as {@link Status#IN_PROGRESS}.
+     *
+     * @param id task ID
+     *
+     * @return {@code true} if updated; {@code false} otherwise
+     */
     public boolean markInProgress(int id) {
         try {
             deserialize();
@@ -90,6 +131,13 @@ public class TaskRepository {
         return true;
     }
 
+    /**
+     * Marks a task as {@link Status#DONE}.
+     *
+     * @param id task ID
+     *
+     * @return {@code true} if updated; {@code false} otherwise
+     */
     public boolean markDone(int id) {
         try {
             deserialize();
@@ -106,6 +154,13 @@ public class TaskRepository {
         return true;
     }
 
+    /**
+     * Retrieves all tasks stored in the repository.
+     *
+     * @return JSON string containing all tasks, or "No tasks." if empty
+     *
+     * @throws JsonProcessingException if serialization fails
+     */
     public String getTasks() throws JsonProcessingException {
         try {
             deserialize();
@@ -120,6 +175,16 @@ public class TaskRepository {
         }
     }
 
+    /**
+     * Retrieves all tasks matching the given status.
+     *
+     * @param status status filter
+     *
+     * @return JSON array containing the selected tasks,
+     * or a message indicating no matching tasks
+     *
+     * @throws JsonProcessingException if serialization fails
+     */
     public String getTasksByStatus(Status status) throws JsonProcessingException {
         try {
             deserialize();
@@ -142,10 +207,20 @@ public class TaskRepository {
         }
     }
 
+    /**
+     * Serializes the task collection to disk.
+     *
+     * @throws IOException if writing to the file fails
+     */
     private void serialize() throws IOException {
         mapper.writeValue(new File(String.valueOf(filePath)), tasks.values());
     }
-
+    
+    /**
+     * Loads tasks from disk into memory.
+     *
+     * @throws IOException if file reading fails
+     */
     private void deserialize() throws IOException {
         TypeReference<List<Task>> typeReference = new TypeReference<>() {
         };

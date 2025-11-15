@@ -4,8 +4,22 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.nio.file.Path;
 
+/**
+ * Entry point for the Task Tracker CLI application.
+ * <p>
+ * Supports commands such as adding, updating, deleting,
+ * and listing tasks, as well as marking tasks with different statuses.
+ * </p>
+ */
 public class Main {
 
+    /**
+     * Application entry point. Parses CLI arguments and executes commands.
+     *
+     * @param args command-line arguments
+     *
+     * @throws JsonProcessingException if JSON parsing or serialization fails
+     */
     public static void main(String[] args) throws JsonProcessingException {
         Path repoFilePath = Path.of("tasks.json");
         TaskService taskService = new TaskService(repoFilePath);
@@ -102,6 +116,13 @@ public class Main {
 
     }
 
+    /**
+     * Lists tasks filtered by the provided status string.
+     *
+     * @param status      the status filter ("done", "todo", "in-progress")
+     * @param taskService service used to access task operations
+     * @throws JsonProcessingException if JSON parsing fails
+     */
     private static void listByStatus(String status, TaskService taskService) throws JsonProcessingException {
         switch (status) {
             case "done" -> taskService.listDone();
@@ -111,6 +132,9 @@ public class Main {
         }
     }
 
+    /**
+     * Prints the help menu showing supported CLI commands.
+     */
     private static void printHelp() {
         System.out.println("""
                 Usage:
