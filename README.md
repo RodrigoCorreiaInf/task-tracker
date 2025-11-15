@@ -1,4 +1,4 @@
-# 📝 Task Tracker CLI
+# Task Tracker CLI
 
 A simple command-line **Task Tracker** built in Java 21.  
 Supports adding, updating, deleting, listing, and changing the status of tasks stored in a JSON file.
@@ -7,7 +7,7 @@ Ideal for learning Java, Maven, JSON serialization (Jackson), and CLI app distri
 
 ---
 
-## 🚀 Features
+## Features
 
 - Add tasks
 - Update tasks
@@ -21,14 +21,14 @@ Ideal for learning Java, Maven, JSON serialization (Jackson), and CLI app distri
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - **Java 21** or higher
 - **Maven 3.8+**
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 task-tracker/
@@ -42,7 +42,7 @@ task-tracker/
 
 ---
 
-## ⚙️ Build the project
+## Build the project
 
 Run:
 
@@ -58,7 +58,7 @@ target/task-tracker-1.0-SNAPSHOT-jar-with-dependencies.jar
 
 ---
 
-## ▶️ Running the CLI
+## Running the CLI
 
 ### **Option 1 — Using the .bat script (Windows)**
 
@@ -111,7 +111,7 @@ java -jar target/task-tracker-1.0-SNAPSHOT-jar-with-dependencies.jar list
 
 ---
 
-## 💾 Where are tasks stored?
+## Where are tasks stored?
 
 A file named `tasks.json` will be created in the project root:
 
@@ -131,7 +131,7 @@ Example content:
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 ```sh
 mvn test
@@ -139,7 +139,7 @@ mvn test
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Java 21
 - Maven
@@ -148,7 +148,7 @@ mvn test
 
 ---
 
-## 🙌 Contributing
+## Contributing
 
 Feel free to open issues or submit pull requests.
 
