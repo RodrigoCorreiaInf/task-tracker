@@ -63,7 +63,7 @@ target/task-tracker-1.0-SNAPSHOT-jar-with-dependencies.jar
 ### **Option 1 — Using the .bat script (Windows)**
 
 ```
-task-cli.bat add "My task"
+task-cli.bat add "My task" 
 task-cli.bat list
 task-cli.bat update 1 "New description"
 task-cli.bat delete 2
