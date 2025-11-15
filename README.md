@@ -3,6 +3,7 @@
 A simple command-line **Task Tracker** built in Java 21.  
 Supports adding, updating, deleting, listing, and changing the status of tasks stored in a JSON file.
 
+Project from roadmap.sh: https://roadmap.sh/projects/task-tracker
 Ideal for learning Java, Maven, JSON serialization (Jackson), and CLI app distribution.
 
 ---
